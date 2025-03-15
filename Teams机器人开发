@@ -1,0 +1,20 @@
+// 使用Bot Framework创建Teams机器人
+const { BotFrameworkAdapter } = require('botbuilder');
+const adapter = new BotFrameworkAdapter({
+    appId: process.env.MicrosoftAppId,
+    appPassword: process.env.MicrosoftAppPassword
+});
+
+adapter.onTurnError = async (context, error) => {
+    await context.sendActivity('操作失败，请重试');
+};
+
+// 处理消息事件
+server.post('/api/messages', (req, res) => {
+    adapter.processActivity(req, res, async (context) => {
+        if (context.activity.type === 'message') {
+            const text = context.activity.text;
+            await context.sendActivity(`您说：${text}`);
+        }
+    });
+});
