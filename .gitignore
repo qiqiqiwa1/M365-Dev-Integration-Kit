@@ -1,22 +1,87 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
+# Microsoft 365开发专用.gitignore
+
+### 核心防护 ###
+#################
+# 通用系统文件
+.DS_Store
+Thumbs.db
+*.swp
+~$*
+
+# IDE配置
+.vs/
+.idea/
 .vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-file
-*.flf
-#Test results file
-TestResults.xml
+*.suo
+*.user
+*.code-workspace
+*.csproj.user
+
+# 敏感数据（关键！）
+.env
+*.env.local
+appsettings.Production.json
+secrets.xml
+pfx/
+*.pfx
+ServicePrincipal.json
+
+
+### 语言相关 ###
+#################
+# C#/.NET
+bin/
+obj/
+*.pdb
+*.dll
+*.exe
+*.nupkg
+TestResults/
+
+# Node.js
+node_modules/
+dist/
+.npm
+.eslintcache
+.yarn/unplugged
+.yarn/build-state.yml
+.pnp.*
+
+
+### Microsoft 365开发特殊项 ###
+##############################
+# Power Platform本地调试
+.powerapps/
+PowerAppsTempUploads/
+
+# Teams Toolkit生成文件
+appPackage/__generated__
+.env.teamsfx.local
+
+# Azure Functions
+.local.settings.json
+func-artifacts/
+
+# Microsoft Graph SDK缓存
+.graphtemp/
+
+
+### 构建系统 ###
+#################
+# MSBuild
+_Build/
+[Bb]uild/
+[Oo]bj/
+artifacts/
+
+# 包管理器
+packages/
+*.nupkg
+*.nuspec
+
+
+### 文档/测试 ###
+#################
+*.chm
+.coverage
+TestResult.xml
