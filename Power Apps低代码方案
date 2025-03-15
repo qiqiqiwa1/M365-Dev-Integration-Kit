@@ -1,0 +1,7 @@
+// 创建画布应用数据筛选逻辑
+Filter(
+    SharePointOnline列表,
+    Status = "待审批" && 
+    DateDiff(Today(), CreatedDate) <= 7 &&
+    Department = Dropdown1.Selected.Value
+)
