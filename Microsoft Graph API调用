@@ -1,0 +1,25 @@
+// 使用Microsoft Graph SDK获取用户邮箱信息
+var scopes = new[] { "User.Read", "Mail.Read" };
+var clientId = "YOUR_CLIENT_ID";
+var tenantId = "YOUR_TENANT_ID";
+
+var options = new TokenCredentialOptions
+{
+    AuthorityHost = AzureAuthorityHosts.AzurePublicCloud
+};
+var clientSecretCredential = new ClientSecretCredential(
+    tenantId, clientId, "CLIENT_SECRET", options);
+
+var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
+
+// 获取用户最新5封邮件
+var messages = await graphClient.Me.Messages
+    .Request()
+    .Top(5)
+    .Select(m => new { m.Subject, m.ReceivedDateTime })
+    .GetAsync();
+
+foreach (var message in messages)
+{
+    Console.WriteLine($"主题：{message.Subject} | 接收时间：{message.ReceivedDateTime}");
+}
